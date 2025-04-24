@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Chess</title>
+
+    <!-- PyScript CSS and JS -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.05.1/pyscript.css" />
+    <script defer src="https://pyscript.net/releases/2023.05.1/pyscript.js"></script>
+
+    <!-- Define Python dependencies -->
+    <py-config>
+        packages = ["chess"]
+
+        [[fetch]]
+        files = ["./main.py"]
+
+        [splashscreen]
+        enabled = true
+        autoclose = true
+    </py-config>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 60px);
+            grid-template-rows: repeat(8, 60px);
+            gap: 0;
+            border: 2px solid #333;
+            margin-bottom: 20px;
+        }
+
+        .square {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .light {
+            background-color: #f0d9b5;
+        }
+
+        .dark {
+            background-color: #b58863;
+        }
+
+        .selected {
+            background-color: #aec6cf !important;
+        }
+
+        .valid-move {
+            position: relative;
+        }
+
+        .valid-move::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(0, 128, 0, 0.5);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .piece {
+            font-size: 40px;
+            z-index: 2;
+            cursor: grab;
+            user-select: none;
+        }
+
+        #controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #status {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        #info {
+            margin-top: 20px;
+            text-align: center;
+            color: #666;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Python Chess</h1>
+
+    <div id="game-container">
+        <div id="status">White to move</div>
+
+        <div id="controls">
+            <button id="reset-button">New Game</button>
+            <button id="ai-button">Play vs AI</button>
+        </div>
+
+        <div id="chessboard"></div>
+    </div>
+
+    <div id="info">
+        <p>This chess game is built entirely in Python and runs in your browser using PyScript.</p>
+        <p>Play against a friend or toggle the AI to play against the computer.</p>
+        <p>Click on a piece to select it, then click on a valid destination square to move.</p>
+    </div>
+
+    <!-- Python script -->
+    <py-script>
+        # Import and run the Python code from main.py
+        from main import init
+
+        # Initialize the game when the page loads
+        init()
+    </py-script>
+</body>
+</html>
